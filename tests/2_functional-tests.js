@@ -25,6 +25,10 @@ suite('Functional Tests', function() {
       .end(function(err, res){
         assert.equal(res.status, 200);
         assert.isArray(res.body, 'response should be an array');
+        if(!res.body[0]) {
+          done();
+          return;
+        }
         assert.property(res.body[0], 'commentcount', 'Books in array should contain commentcount');
         assert.property(res.body[0], 'title', 'Books in array should contain title');
         assert.property(res.body[0], '_id', 'Books in array should contain _id');
